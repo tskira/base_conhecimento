@@ -2,13 +2,13 @@ diag_febre():-
 
 	%% inicializacao das variaveis
 	% 'x' indica que a questao tn nao foi respondida
-	Value = 'x',
-	Value2 = 'x',
-	Value3 = 'x',
-	Value4 = 'x',
-	Value5 = 'x',
-	Value6 = 'x',
-	Value7 = 'x',
+	nb_setval(t1, 'x'),
+	nb_setval(t2, 'x'),
+	nb_setval(t3, 'x'),
+	nb_setval(t4, 'x'),
+	nb_setval(t5, 'x'),
+	nb_setval(t6, 'x'),
+	nb_setval(t7, 'x'),
 
 	writeln('### Progra de diagnostico para febre ###'),
 	writeln('### Dr. Thiago Kira ###'),
@@ -21,24 +21,12 @@ diag_febre():-
 	writeln(' s - sim / n - nao'),
 
 	read(Resposta1),
-	nb_setval(Resposta1, Value),
+	nb_setval(t1, Resposta1),
 	questao2(Resposta1, Diagnostico_final, Caso),
+	writeln(' ### DIAGNOSTICO FINAL ### '),
 	writeln(Diagnostico_final),
 	writeln(Caso),
-
-	writeln(Value),
-	writeln(Value2),
-	writeln(Value3),
-	writeln(Value4),
-	writeln(Value5),
-	writeln(Value6),
-	writeln(Value7),
-
-	base_diagnostico(Caso, Value, Value2, Value3, X),
-	writeln(X).
-
-
-
+	pergunta(Caso).
 
 questao2(R1, Diagnostico_final, Caso) :-
 	R1 == 's',
@@ -51,7 +39,7 @@ questao2(R1, Diagnostico_final, Caso) :-
 	writeln(' * Temperatura superior a 39 graus'),
 	writeln(' s - sim	/ n - nao'),
 	read(Resposta2),
-	nb_setval(Resposta2, Value2),
+	nb_setval(t2, Resposta2),
 	questao3(Resposta2, Diagnostico_final, Caso).
 
 questao3(R2, Diagnostico_final, Caso) :-
@@ -122,19 +110,28 @@ questao8(R7, Diagnostico_final, Caso) :-
 % Base de conhecimento para diagnostico
 % Caso o diagnostico final seja inconclusivo buscas-se um possivel
 % diagnostico nesta base de conhecimento
+%
 
-base_diagnostico(0, 'n', 'n', 's', 'OBITO').
-base_diagnostico(0, 'n','n','s','n','s','x','x','Dermatite com febre').
-base_diagnostico(0, 'n','n','s','n','n','s','x','Otite interna').
-base_diagnostico(0, 'n','n','s','n','n','n','d','Pneumonia ou bronquiolite').
-base_diagnostico(0, 'n','n','s','n','n','n','n','Pneumonia ou bronquiolite').
+falso(0).
+verdadeiro(1).
 
+pergunta(A):-
+	falso(A),
+	teste2();
+	verdadeiro(A),
+	writeln('fim').
 
+teste2():-
+	teste(C),
+	writeln(C).
+
+teste(B) :- B = 'ruim'.
+teste(B) :- B = 'muito ruim'.
 
 :- begin_tests(diag).
 
-test(t0, X = 'Diagnostico inconclusivo. Procure um medico') :- diag_febre(X
-										     ).
+test(t0, X = 'Diagnostico inconclusivo. Procure um medico') :- diag_febre(X).
+
 :- end_tests(diag).
 
 
