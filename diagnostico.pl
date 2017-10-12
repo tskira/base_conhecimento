@@ -1,4 +1,4 @@
-diag_febre():-
+diag_febre(Caso):-
 
 	%% inicializacao das variaveis
 	% 'x' indica que a questao tn nao foi respondida
@@ -24,9 +24,8 @@ diag_febre():-
 	nb_setval(t1, Resposta1),
 	questao2(Resposta1, Diagnostico_final, Caso),
 	writeln(' ### DIAGNOSTICO FINAL ### '),
-	writeln(Diagnostico_final),
-	writeln(Caso),
-	pergunta(Caso).
+	writeln(''),
+	writeln(Diagnostico_final).
 
 questao2(R1, Diagnostico_final, Caso) :-
 	R1 == 's',
@@ -115,18 +114,23 @@ questao8(R7, Diagnostico_final, Caso) :-
 falso(0).
 verdadeiro(1).
 
-pergunta(A):-
-	falso(A),
-	teste2();
-	verdadeiro(A),
-	writeln('fim').
+teste() :-
+	diag_febre(Caso) , !, (
+	Caso == 0 ->( writeln(''),
+		     writeln(' ### DIAGNOSTICO ALTERNATIVO ### '),
+		     writeln(''),
+		     diag_alternativo()),
+	Caso == 1 ->
+	writeln(' ### FIM DO DIAGNOSTICO ### ')).
 
-teste2():-
-	teste(C),
-	writeln(C).
+diag_alternativo() :-
+	d(0, 0, 0, Condicao1, Diagnostico1),
+	write('se tiver '), write(Condicao1), write(' pode estar com '), writeln(Diagnostico1).
 
-teste(B) :- B = 'ruim'.
-teste(B) :- B = 'muito ruim'.
+d(0, 0, 0, 'Gonorreia', 'Aids').
+d(0, 0, 0, 'bem ruim', 'obito').
+
+
 
 :- begin_tests(diag).
 
