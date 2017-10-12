@@ -1,4 +1,4 @@
-diag_febre(Caso):-
+diag_febre(Caso, R1, R2, R3, R4, R5, R6, R7):-
 
 	%% inicializacao das variaveis
 	% 'x' indica que a questao tn nao foi respondida
@@ -119,9 +119,9 @@ teste() :-
 	Caso == 0 ->( writeln(''),
 		     writeln(' ### DIAGNOSTICO ALTERNATIVO ### '),
 		     writeln(''),
-		     diag_alternativo()),
-	Caso == 1 ->
-	writeln(' ### FIM DO DIAGNOSTICO ### ')).
+		     diag_alternativo(),
+		     nl)),
+	Caso == 1 -> writeln(' ### FIM DO DIAGNOSTICO ### ').
 
 diag_alternativo() :-
 	d(0, 0, 0, Condicao1, Diagnostico1),

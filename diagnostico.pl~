@@ -115,12 +115,13 @@ falso(0).
 verdadeiro(1).
 
 teste() :-
-	diag_febre(Caso), !, (
+	diag_febre(Caso) , !, (
 	Caso == 0 ->( writeln(''),
 		     writeln(' ### DIAGNOSTICO ALTERNATIVO ### '),
 		     writeln(''),
-		     diag_alternativo()),
-	writeln(' ### FIM DO DIAGNOSTICO ### ')).
+		     diag_alternativo(),
+		     nl)),
+	Caso == 1 -> writeln(' ### FIM DO DIAGNOSTICO ### ').
 
 diag_alternativo() :-
 	d(0, 0, 0, Condicao1, Diagnostico1),
