@@ -1,15 +1,5 @@
 diag_febre(Caso, R1, R2, R3, R4, R5, R6, R7):-
 
-	%% inicializacao das variaveis
-	% 'x' indica que a questao tn nao foi respondida
-	nb_setval(t1, 'x'),
-	nb_setval(t2, 'x'),
-	nb_setval(t3, 'x'),
-	nb_setval(t4, 'x'),
-	nb_setval(t5, 'x'),
-	nb_setval(t6, 'x'),
-	nb_setval(t7, 'x'),
-
 	writeln('### Progra de diagnostico para febre ###'),
 	writeln('### Dr. Thiago Kira ###'),
 	writeln('### CRM 78750 ###'),
@@ -19,15 +9,13 @@ diag_febre(Caso, R1, R2, R3, R4, R5, R6, R7):-
 	writeln(' * Respiracao ruidosa ou dificil'),
 	writeln(' * Sonolencia ou irritabilidade'),
 	writeln(' s - sim / n - nao'),
-
-	read(Resposta1),
-	nb_setval(t1, Resposta1),
-	questao2(Resposta1, Diagnostico_final, Caso),
+	read(R1),
+	questao2(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso),
 	writeln(' ### DIAGNOSTICO FINAL ### '),
 	writeln(''),
 	writeln(Diagnostico_final).
 
-questao2(R1, Diagnostico_final, Caso) :-
+questao2(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R1 == 's',
 	Caso = 1,
 	Diagnostico_final = 'Chame uma ambulancia';
@@ -37,21 +25,19 @@ questao2(R1, Diagnostico_final, Caso) :-
 	writeln(' * Vomito persistente'),
 	writeln(' * Temperatura superior a 39 graus'),
 	writeln(' s - sim	/ n - nao'),
-	read(Resposta2),
-	nb_setval(t2, Resposta2),
-	questao3(Resposta2, Diagnostico_final, Caso).
+	read(R2),
+	questao3(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso).
 
-questao3(R2, Diagnostico_final, Caso) :-
+questao3(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R2 == 's',
 	Caso = 1,
 	Diagnostico_final = 'Procure orientacao medica';
 	write(' 3 - Temperatura maior a 38 graus?'), nl,
 	write(' s - sim / n - nao / d - nao sei '),nl,
-	read(Resposta3),
-	nb_setval(t3, Resposta3),
-	questao4(Resposta3, Diagnostico_final, Caso).
+	read(R3),
+	questao4(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso).
 
-questao4(R3, Diagnostico_final, Caso) :-
+questao4(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R3 == 'd',
 	Caso = 0,
 	Diagnostico_final = 'Faca mais exames';
@@ -60,41 +46,37 @@ questao4(R3, Diagnostico_final, Caso) :-
 	Diagnostico_final = 'Doenca nao identificada';
 	writeln(' 4 - Tem menos de 6 meses de idade? '),
 	writeln(' s - sim / n - nao'),
-	read(Resposta4),
-	nb_setval(t4, Resposta4),
-	questao5(Resposta4, Diagnostico_final, Caso).
+	read(R4),
+	questao5(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso).
 
-questao5(R4, Diagnostico_final, Caso) :-
+questao5(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R4 == 's',
 	Caso = 0,
 	Diagnostico_final = 'Procure um medico. Caso incomum .Pode ser uma doenca seria ';
-	writeln(' 4 - Apresenta alguma erupcao na pele '),
+	writeln(' 5 - Apresenta alguma erupcao na pele '),
 	writeln(' s - sim / n - nao '),
-	read(Resposta5),
-	nb_setval(t5, Resposta5),
-	questao6(Resposta5, Diagnostico_final, Caso).
+	read(R5),
+	questao6(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso).
 
-questao6(R5, Diagnostico_final, Caso) :-
+questao6(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso) :-
 	R5 == 's',
 	Caso = 1,
 	Diagnostico_final = 'Dermatite com febre. Consulte um medico';
-	writeln(' 5 - Chora, puxa uma orelha ou acorda gritando? '),
+	writeln(' 6 - Chora, puxa uma orelha ou acorda gritando? '),
 	writeln(' s - sim / n -nao '),
-	read(Resposta6),
-	nb_setval(t6,Resposta6),
-	questao7(Resposta6, Diagnostico_final, Caso).
+	read(R6),
+	questao7(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso).
 
-questao7(R6, Diagnostico_final, Caso) :-
+questao7(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso) :-
 	R6 == 's',
 	Caso = 1,
 	Diagnostico_final = 'Otite interna. Consulte um medico';
-	writeln(' 6 - Ritmo respiratorio acima do normal?'),
+	writeln(' 7 - Ritmo respiratorio acima do normal?'),
 	writeln(' s - sim / n - nao / d - nao sei'),
-	read(Resposta7),
-	nb_setval(t7, Resposta7),
-	questao8(Resposta7, Diagnostico_final, Caso).
+	read(R7),
+	questao8(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso).
 
-questao8(R7, Diagnostico_final, Caso) :-
+questao8(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R7 == 'd',
 	Caso = 0,
 	Diagnostico_final = 'Faca mais exames';
@@ -115,20 +97,31 @@ falso(0).
 verdadeiro(1).
 
 teste() :-
-	diag_febre(Caso) , !, (
-	Caso == 0 ->( writeln(''),
+	diag_febre(Caso, R1, R2, R3, R4, R5, R6, R7)  , !, (
+	falso(Caso) ->( writeln(''),
 		     writeln(' ### DIAGNOSTICO ALTERNATIVO ### '),
 		     writeln(''),
-		     diag_alternativo(),
+		     diag_alternativo(R1, R2, R3, R4, R5, R6, R7),
 		     nl)),
-	Caso == 1 -> writeln(' ### FIM DO DIAGNOSTICO ### ').
+	verdadeiro(Caso) -> writeln(' ### FIM DO DIAGNOSTICO ### ').
 
-diag_alternativo() :-
-	d(0, 0, 0, Condicao1, Diagnostico1),
-	write('se tiver '), write(Condicao1), write(' pode estar com '), writeln(Diagnostico1).
+diag_alternativo(R1, R2, R3, R4, R5, R6, R7) :-
+        (var(R7), var(R4)) -> (
+	d(R1, R2, R3, _, _, _, _, Condicao1, Diagnostico1),
+	write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
+	(var(R7)) -> (
+	d(R1, R2, R3, R4, _, _, _, Condicao1, Diagnostico1),
+	write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
+	d(R1, R2, R3, R4, R5, R6, R7, Condicao1, Diagnostico1),
+	write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1).
 
-d(0, 0, 0, 'Gonorreia', 'Aids').
-d(0, 0, 0, 'bem ruim', 'obito').
+
+% BASE DE CONHECIMENTO
+
+d(n, n, n, n, s, s, s, 'Gonorreia', 'com Aids').
+d(n, n, n, n, s, s, s, 'bem ruim', 'em estado vegetativo').
+d(n, n, s, s, s, s, s, 'Dor de cabeca', 'com hemorragia').
+d(n, n, s, n, n, n, d, 'com Fome', 'Desnutrido').
 
 
 
