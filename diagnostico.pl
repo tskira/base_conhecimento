@@ -103,7 +103,8 @@ teste() :-
 		     writeln(''),
 		     diag_alternativo(R1, R2, R3, R4, R5, R6, R7),
 		     nl)),
-	verdadeiro(Caso) -> writeln(' ### FIM DO DIAGNOSTICO ### ').
+	verdadeiro(Caso) -> writeln(' ###  ### ').
+
 
 diag_alternativo(R1, R2, R3, R4, R5, R6, R7) :-
         (var(R7), var(R4)) -> (
@@ -169,7 +170,7 @@ d(n,n,s,n,n,n,n, 'coceira', 'com Dermatite com febre').
 
 :- begin_tests(diag).
 
-test(t0, X = 'Diagnostico inconclusivo. Procure um medico') :- diag_febre(X).
+test(t0, X = 'Diagnostico inconclusivo. Procure um medico') :- teste(X).
 
 :- end_tests(diag).
 
