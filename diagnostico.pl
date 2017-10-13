@@ -1,4 +1,6 @@
-diag_febre(Caso, R1, R2, R3, R4, R5, R6, R7):-
+% Diagnostico por arvore de decisao
+% Etapa deterministica
+d_arvore(Caso, R1, R2, R3, R4, R5, R6, R7):-
 
 	writeln('### Progra de diagnostico para febre ###'),
 	writeln('### Dr. Thiago Kira ###'),
@@ -88,25 +90,21 @@ questao8(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	Diagnostico_final = 'Diagnostico inconclusivo. Procure um medico'.
 
 
-% Base de conhecimento para diagnostico
-% Caso o diagnostico final seja inconclusivo buscas-se um possivel
-% diagnostico nesta base de conhecimento
-%
-
 falso(0).
 verdadeiro(1).
 
-teste() :-
-	diag_febre(Caso, R1, R2, R3, R4, R5, R6, R7)  , !, (
+% Chamada principal
+diagnostico() :-
+	d_arvore(Caso, R1, R2, R3, R4, R5, R6, R7)  , !, (
 	falso(Caso) ->( writeln(''),
 		     writeln(' ### DIAGNOSTICO ALTERNATIVO ### '),
 		     writeln(''),
-		     diag_alternativo(R1, R2, R3, R4, R5, R6, R7),
+		     d_base(R1, R2, R3, R4, R5, R6, R7),
 		     nl)),
 	verdadeiro(Caso) -> writeln(' ###  ### ').
 
 
-diag_alternativo(R1, R2, R3, R4, R5, R6, R7) :-
+d_base(R1, R2, R3, R4, R5, R6, R7) :-
         (var(R7), var(R4)) -> (
 	d(R1, R2, R3, _, _, _, _, Condicao1, Diagnostico1),
 	write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
@@ -149,28 +147,28 @@ d(n, s, n, n, s, s, n, 'vomito sem diarreia', 'com meningite').
 d(n, s, n, n, s, s, s, 'vomito com diarreia', 'com gastroenterite').
 d(n, s, s, s, s, s, s, 'Dor de cabeca', 'com hemorragia').
 d(s, n, s, n, n, n, d, 'com Fome', 'Desnutrido').
-d(n,n,s,s,n,n,d, 'com diarreia', 'com gastroenterite').
-d(n,n,s,s,n,s,d, 'tomando algum medicamento', 'fazendo efeito colateral').
-d(n,n,s,s,s,n,d, 'vomito esverdeado', 'com obstrucao intestinal').
-d(n,n,s,s,s,n,n, 'com fezes palidas e urina escura', 'com Hepatite').
-d(n,n,s,s,n,n,d, 'fazendo xixi na cama', 'com Meningite').
-d(n,n,s,s,n,n,n, 'roubando coisas de casa', 'Usando dogras').
-d(n,n,s,n,n,n,d, 'caindo no chao inconsciente', 'com Hipoglecimia').
-d(n,n,s,n,n,n,d, 'com urina verde ou azul', 'com Problemas alimentares').
-d(n,n,s,n,n,n,d, 'com fezes com sangue', 'com falha instestinal').
-d(n,n,s,n,n,n,d, 'com dor ao urinar', 'com infeccao do sistema urinario').
-d(n,n,s,n,n,n,n, 'inchaço dolorido na verilia', 'com Hernia inguinal estrangulada').
-d(n,n,s,n,n,n,n, 'com dor na lingua', 'com Ulceras bucais').
-d(n,n,s,n,n,n,n, 'gengivas dolorias vermelhas', 'denticao').
-d(n,n,s,n,n,n,n, 'com tosse ou coriza', 'com Febre').
-d(n,n,s,n,n,n,n, 'com febre', 'com Diarreia').
-d(n,n,s,n,n,n,n, 'anormalmente sonolento', 'com Vomito').
-d(n,n,s,n,n,n,n, 'coceira', 'com Dermatite com febre').
+d(n, n, s, s, n, n, d, 'com diarreia', 'com gastroenterite').
+d(n, n, s, s, n, s, d, 'tomando algum medicamento', 'fazendo efeito colateral').
+d(n, n, s, s, s, n, d, 'vomito esverdeado', 'com obstrucao intestinal').
+d(n, n, s, s, s, n, n, 'com fezes palidas e urina escura', 'com Hepatite').
+d(n, n, s, s, n, n, d, 'fazendo xixi na cama', 'com Meningite').
+d(n, n, s, s, n, n, n, 'roubando coisas de casa', 'Usando dogras').
+d(n, n, s, n, n, n, d, 'caindo no chao inconsciente', 'com Hipoglecimia').
+d(n, n, s, n, n, n, d, 'com urina verde ou azul', 'com Problemas alimentares').
+d(n, n, s, n, n, n, d, 'com fezes com sangue', 'com falha instestinal').
+d(n, n, s, n, n, n, d, 'com dor ao urinar', 'com infeccao do sistema urinario').
+d(n, n, s, n, n, n, n, 'inchaço dolorido na verilia', 'com Hernia inguinal estrangulada').
+d(n, n, s, n, n, n, n, 'com dor na lingua', 'com Ulceras bucais').
+d(n, n, s, n, n, n, n, 'gengivas dolorias vermelhas', 'denticao').
+d(n, n, s, n, n, n, n, 'com tosse ou coriza', 'com Febre').
+d(n, n, s, n, n, n, n, 'com febre', 'com Diarreia').
+d(n, n, s, n, n, n, n, 'anormalmente sonolento', 'com Vomito').
+d(n, n, s, n, n, n, n, 'coceira', 'com Dermatite com febre').
 
 
+% TESTES UNITARIOS
 :- begin_tests(diag).
 
-test(t0, X = 'Diagnostico inconclusivo. Procure um medico') :- teste(X).
 
 :- end_tests(diag).
 
