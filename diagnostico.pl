@@ -36,7 +36,7 @@ questao2(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 
 questao3(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R2 == 's',
-	Caso = 0,
+	Caso = 1,
 	Diagnostico_final = 'Procure orientacao medica';
 	write(' 3 - Temperatura maior a 38 graus?'), nl,
 	write(' s - sim / n - nao / d - nao sei '),nl,
@@ -103,12 +103,12 @@ diagnostico() :-
 	falso(Caso) -> ( writeln(''),nl,nl,
 		     writeln(' ### DIAGNOSTICO ALTERNATIVO ### '),nl,
 		     writeln(' Baseado no questionario anterior, foi possivel inferir os seguintes diagnosticos: '),nl,
-		     d_base(R1, R2, R3, R4, R5, R6, R7), nl),
-	verdadeiro(Caso) -> writeln(' ###  ### '),
+		     d_base(R1, R2, R3, R4, R5, R6, R7), nl)),
+	verdadeiro(Caso) -> writeln(' ###  ### ');
 	nl,
 	writeln(' ### ENCERRANDO SISTEMA DE DIAGNOSTICO ###'),
-	writeln(' ### OBRIGADO ### '),nl,
-	writeln(' ############################################################# ')).
+        writeln(' ### OBRIGADO ### '),nl,
+	writeln(' ############################################################# ').
 
 
 d_base(R1, R2, R3, R4, R5, R6, R7) :-
