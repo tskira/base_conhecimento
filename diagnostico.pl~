@@ -2,72 +2,72 @@
 % Etapa deterministica
 d_arvore(Caso, R1, R2, R3, R4, R5, R6, R7):-
 
-	writeln('### Progra de diagnostico para febre ###'),
+	writeln('### Progra de diagnostico de doenças ###'),
 	writeln('### Dr. Thiago Kira ###'),
 	writeln('### CRM 78750 ###'),
-	writeln('### Consultorio UEM ###'),
-	writeln('### Iniciando diagnostico ... ###'),
+	writeln('### Consultório UEM ###'),
+	writeln('### Iniciando diagnóstico ... ###'),
 	writeln('### Responda as seguintes perguntas ###'),nl,
 
 	writeln(' 1 - Apresenta algum dos seguintes sintomas? '),
-	writeln(' * Respiracao anormalmente rapida'),
-	writeln(' * Respiracao ruidosa ou dificil'),
-	writeln(' * Sonolencia ou irritabilidade'),
-	writeln(' s - sim / n - nao'),
+	writeln(' * Respiração anormalmente rápida'),
+	writeln(' * Respiração ruidosa ou difícil'),
+	writeln(' * Sonolência ou irritabilidade'),
+	writeln(' s - sim / n - não '),
 	read(R1),
 	questao2(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso),nl,nl,nl,
 	writeln(' ############################################################# '),nl,
-	writeln(' ### DIAGNOSTICO FINAL ### '),nl,
-	writeln(' Baseado no questionario, o seguinte diagnostico foi identificado : '),nl,
+	writeln(' ### DIAGNÓSTICO FINAL ### '),nl,
+	writeln(' Baseado no questionário, o seguinte diagnóstico foi identificado : '),nl,
 	write(' -> '), writeln(Diagnostico_final).
 
 questao2(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R1 == 's',
-	Caso = 1,
-	Diagnostico_final = 'Caso serio. Chame uma ambulancia';
+	Caso = 0,
+	Diagnostico_final = 'Sintomas graves. Pode ser um caso sério. Chame uma ambulância.';
 
 	writeln(' 2 - Apresenta algum dos seguintes sintomas? '),
-	writeln(' * Nao quer beber'),
-	writeln(' * Vomito persistente'),
+	writeln(' * Rejeita bebidas (água, leite)'),
+	writeln(' * Vômito persistente'),
 	writeln(' * Temperatura superior a 39 graus'),
-	writeln(' s - sim	/ n - nao'),
-	read(R2),
+	writeln(' s - sim / n - não'),
+	nread(R2),
 	questao3(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso).
 
 questao3(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R2 == 's',
-	Caso = 1,
-	Diagnostico_final = 'Procure orientacao medica';
+	Caso = 0,
+	Diagnostico_final = 'Pode ser um caso grave. Procure uma orientação médica urgentemente.';
 	write(' 3 - Temperatura maior a 38 graus?'), nl,
-	write(' s - sim / n - nao / d - nao sei '),nl,
+	write(' s - sim / n - não / d - não sei '),nl,
 	read(R3),
 	questao4(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso).
 
 questao4(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R3 == 'd',
 	Caso = 0,
-	Diagnostico_final = 'Faca mais exames';
+	Diagnostico_final = 'Faça mais exames';
 	R3 == 'n',
 	Caso = 0,
-	Diagnostico_final = 'Doenca nao identificada';
+	Diagnostico_final = 'Doença não identificada';
 	writeln(' 4 - Tem menos de 6 meses de idade? '),
-	writeln(' s - sim / n - nao'),
+	writeln(' s - sim / n - não'),
 	read(R4),
 	questao5(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso).
 
 questao5(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R4 == 's',
 	Caso = 0,
-	Diagnostico_final = 'Procure um medico. Caso incomum .Pode ser uma doenca seria ';
-	writeln(' 5 - Apresenta alguma erupcao na pele '),
-	writeln(' s - sim / n - nao '),
+	Diagnostico_final = 'Procure um médico. Diagnóstico incomum .Pode ser uma doença séria ';
+	writeln(' 5 - Apresenta erupcões na pele?'),
+	writeln(' s - sim / n - não '),
 	read(R5),
 	questao6(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso).
 
 questao6(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso) :-
 	R5 == 's',
 	Caso = 1,
-	Diagnostico_final = 'Dermatite com febre. Consulte um medico';
+	Diagnostico_final = 'Dermatite com febre. Consulte um médico';
 	writeln(' 6 - Chora, puxa uma orelha ou acorda gritando? '),
 	writeln(' s - sim / n -nao '),
 	read(R6),
@@ -76,22 +76,22 @@ questao6(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso) :-
 questao7(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso) :-
 	R6 == 's',
 	Caso = 1,
-	Diagnostico_final = 'Otite interna. Consulte um medico';
-s.	writeln(' 7 - Ritmo respiratorio acima do normal?'),
-	writeln(' s - sim / n - nao / d - nao sei'),
+	Diagnostico_final = 'Otite interna. Consulte um médico';
+	writeln(' 7 - Ritmo respiratório acima do normal?'),
+	writeln(' s - sim / n - não / d - não sei'),
 	read(R7),
 	questao8(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso).
 
 questao8(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R7 == 'd',
 	Caso = 0,
-	Diagnostico_final = 'Faca mais exames';
+	Diagnostico_final = 'O sistema não foi capaz de identificar a doença com base nestes sintomas. Faça mais exames para obter uma avaliação mais precisa';
 	R7 == 's',
 	Caso = 1,
-	Diagnostico_final = 'Pneumonia ou bronquite. Procure um medico';
+	Diagnostico_final = 'Pneumonia ou Bronquite. Procure um médico com urgência';
 	R7 == 'n',
 	Caso = 0,
-	Diagnostico_final = 'Diagnostico inconclusivo. Procure um medico'.
+	Diagnostico_final = 'O sistema não foi capaz de identificar um diagnóstico conclusivo. Consulte um médico para maiores informaçoes'.
 
 
 falso(0).
@@ -101,81 +101,87 @@ verdadeiro(1).
 diagnostico() :-
 	d_arvore(Caso, R1, R2, R3, R4, R5, R6, R7)  , !, (
 	falso(Caso) -> ( writeln(''),nl,nl,
-		     writeln(' ### DIAGNOSTICO ALTERNATIVO ### '),nl,
-		     writeln(' Baseado no questionario anterior, foi possivel inferir os seguintes diagnosticos: '),nl,
+		     writeln(' ### DIAGNÓSTICO ALTERNATIVO ### '),nl,
+		     writeln(' Baseado no questionário anterior, foi possivel inferir os seguintes diagnósticos para o referido caso clínico: '),nl,
 		     d_base(R1, R2, R3, R4, R5, R6, R7), nl)),
 	verdadeiro(Caso) -> writeln(' ###  ### ');
 	nl,
-	writeln(' ### ENCERRANDO SISTEMA DE DIAGNOSTICO ###'),
+	writeln(' ### ENCERRANDO SISTEMA DE DIAGNÓSTICO ###'),
         writeln(' ### OBRIGADO ### '),nl,
 	writeln(' ############################################################# ').
 
 
 d_base(R1, R2, R3, R4, R5, R6, R7) :-
+	(var(R7), var(R4), var(R3), var(R2)) -> (
+	d(R1, _, _, _, _, _, _, Condicao1, Diagnostico1),
+	write('	-: '), write('se estiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
+	(var(R7), var(R4), var(R3)) -> (
+	d(R1, R2, _, _, _, _, _, Condicao1, Diagnostico1),
+	write('	-: '), write('se estiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
         (var(R7), var(R4)) -> (
 	d(R1, R2, R3, _, _, _, _, Condicao1, Diagnostico1),
-	write('	-: '), write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
+	write('	-: '), write('se estiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
 	(var(R7)) -> (
 	d(R1, R2, R3, R4, _, _, _, Condicao1, Diagnostico1),
-	write(' -: '), write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
+	write(' -: '), write('se estiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
 	d(R1, R2, R3, R4, R5, R6, R7, Condicao1, Diagnostico1),
-	write(' -: '), write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1).
+	write(' -: '), write('se estiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1).
 
 
 % BASE DE CONHECIMENTO
-d(n, n, n, n, s, s, s, 'rejeitando comida', 'com garganta infeccionada').
-d(n, n, n, n, s, s, d, 'com gripe ou resfriado', 'com sarampo').
-d(n, n, n, n, s, s, d, 'com tosse ou coriza', 'com resfriado').
-d(n, n, n, n, s, s, d, 'com irratabilidade incomum', 'Meningite').
-d(n, n, n, n, s, s, d, 'rejeitando comida solida', 'com infeccao de garganta').
-d(n, n, d, n, s, s, d, 'com inchaco em um lado da face', 'com caxumba').
-d(n, n, d, n, s, s, d, 'ficado muito tempo no sol', 'superaquecido').
-d(n, n, d, n, s, s, d, 'com vomito persistente', 'diarreia seria, chame uma ambulancia').
-d(n, n, d, n, s, s, d, 'com tosse', 'com bronquiolite').
-d(n, n, d, n, s, s, d, 'vomito normal', 'apenas vomito, nada serio').
-d(n, n, d, n, s, s, d, 'com vomito seguido por crise de tosse', 'coqueluche').
-d(n, n, n, n, s, s, n, 'vomito sem diarreia', 'com meningite').
-d(n, n, n, n, s, s, s, 'vomito com diarreia', 'com gastroenterite').
-d(n, n, s, s, s, s, s, 'Dor de cabeca', 'com hemorragia').
-d(n, n, s, n, n, n, d, 'com Fome', 'Desnutrido').
-d(s, n, n, n, s, s, s, 'rejeitando comido', 'com garganta infeccionada').
-d(s, n, n, n, s, s, d, 'com gripe ou resfriado', 'com sarampo').
-d(s, n, n, n, s, s, d, 'com tosse ou coriza', 'com resfriado').
-d(s, n, n, n, s, s, d, 'com irratabilidade incomum', 'Meningite').
-d(s, n, n, n, s, s, d, 'rejeitando comida solida', 'com infeccao de garganta').
-d(s, n, d, n, s, s, d, 'com inchaco em um lado da face', 'com caxumba').
-d(s, n, d, n, s, s, d, 'ficado muito tempo no sol', 'superaquecido').
-d(n, s, d, n, s, s, d, 'com vomito persistente', 'diarreia seria, chame uma ambulancia').
-d(n, s, d, n, s, s, d, 'com tosse', 'com bronquiolite').
-d(n, s, d, n, s, s, d, 'vomito normal', 'apenas vomito, nada serio').
-d(n, s, d, n, s, s, d, 'com vomito seguido por crise de tosse', 'coqueluche').
-d(n, s, n, n, s, s, n, 'vomito sem diarreia', 'com meningite').
-d(n, s, n, n, s, s, s, 'vomito com diarreia', 'com gastroenterite').
-d(n, s, s, s, s, s, s, 'Dor de cabeca', 'com hemorragia').
-d(s, n, s, n, n, n, d, 'com Fome', 'Desnutrido').
-d(n, n, s, s, n, n, d, 'com diarreia', 'com gastroenterite').
-d(n, n, s, s, n, s, d, 'tomando algum medicamento', 'fazendo efeito colateral').
-d(n, n, s, s, s, n, d, 'vomito esverdeado', 'com obstrucao intestinal').
-d(n, n, s, s, s, n, n, 'com fezes palidas e urina escura', 'com Hepatite').
+d(n, n, n, n, s, s, s, 'rejeitando comida', 'com garganta infeccionada.').
+d(n, n, n, n, s, s, d, 'com gripe ou resfriado', 'com sarampo.').
+d(n, n, n, n, s, s, d, 'com tosse ou coriza', 'com resfriado.').
+d(n, n, n, n, s, s, d, 'com irratabilidade incomum', 'com Meningite.').
+d(n, n, n, n, s, s, d, 'rejeitando comida sólida', 'com infecção de garganta.').
+d(n, n, d, n, s, s, d, 'com inchaço em um lado da face', 'com Caxumba.').
+d(n, n, d, n, s, s, d, 'ficado muito tempo no sol', 'superaquecido.').
+d(n, n, d, n, s, s, d, 'com vômito persistente', 'diarréia séria, chame uma ambulância.').
+d(n, n, d, n, s, s, d, 'com tosse', 'com Bronquiolite.').
+d(n, n, d, n, s, s, d, 'vômito normal', 'apenas vomito, nada sério.').
+d(n, n, d, n, s, s, d, 'com vômito seguido por crise de tosse', 'Coqueluche.').
+d(n, n, n, n, s, s, n, 'vômito sem diarréia', 'com Meningite.').
+d(n, n, n, n, s, s, s, 'vômito com diarréia', 'com gastroenterite.').
+d(n, n, s, s, s, s, s, 'dor de cabeça', 'com hemorragia.').
+d(n, n, s, n, n, n, d, 'com fome', 'desnutrido.').
+d(s, n, n, n, s, s, s, 'rejeitando alimentos', 'com garganta infeccionada.').
+d(s, n, n, n, s, s, d, 'com gripe ou resfriado.', 'com Sarampo.').
+d(s, n, n, n, s, s, d, 'com tosse ou coriza', 'com resfriado.').
+d(s, n, n, n, s, s, d, 'com irratabilidade incomum', 'com meningite.').
+d(s, n, n, n, s, s, d, 'rejeitando comida sólida', 'com infecção de garganta.').
+d(s, n, d, n, s, s, d, 'com inchaço em um lado da face', 'com Caxumba.').
+d(s, n, d, n, s, s, d, 'ficado muito tempo no sol', 'superaquecido.').
+d(n, s, d, n, s, s, d, 'com vômito persistente', 'com uma diarréia séria, chame uma ambulância.').
+d(n, s, d, n, s, s, d, 'com tosse', 'com bronquiolite.').
+d(n, s, d, n, s, s, d, 'vômito normal', 'com apenas vômito, nada serio.').
+d(n, s, d, n, s, s, d, 'com vômito seguido por crise de tosse', 'com Coqueluche.').
+d(n, s, n, n, s, s, n, 'vômito sem diarréia', 'com Meningite.').
+d(n, s, n, n, s, s, s, 'vômito com diarréia', 'com gastroenterite.').
+d(n, s, s, s, s, s, s, 'dor de cabeça', 'com hemorragia.').
+d(s, n, s, n, n, n, d, 'com fome', 'desnutrido.').
+d(n, n, s, s, n, n, d, 'com diarréia', 'com gastroenterite.').
+d(n, n, s, s, n, s, d, 'tomando algum medicamento', 'fazendo efeito colateral do remédio.').
+d(n, n, s, s, s, n, d, 'vômito esverdeado', 'com obstrução intestinal.').
+d(n, n, s, s, s, n, n, 'com fezes pálidas e urina escura', 'com Hepatite.').
 d(n, n, s, s, n, n, d, 'fazendo xixi na cama', 'com Meningite').
-d(n, n, s, s, n, n, n, 'roubando coisas de casa', 'Usando dogras').
-d(n, n, s, n, n, n, d, 'caindo no chao inconsciente', 'com Hipoglecimia').
-d(n, n, s, n, n, n, d, 'com urina verde ou azul', 'com Problemas alimentares').
-d(n, n, s, n, n, n, d, 'com fezes com sangue', 'com falha instestinal').
-d(n, n, s, n, n, n, d, 'com dor ao urinar', 'com infeccao do sistema urinario').
-d(n, n, s, n, n, n, n, 'inchaço dolorido na verilia', 'com Hernia inguinal estrangulada').
-d(n, n, s, n, n, n, n, 'com dor na lingua', 'com Ulceras bucais').
-d(n, n, s, n, n, n, n, 'gengivas dolorias vermelhas', 'denticao').
-d(n, n, s, n, n, n, n, 'com tosse ou coriza', 'com Febre').
-d(n, n, s, n, n, n, n, 'com febre', 'com Diarreia').
-d(n, n, s, n, n, n, n, 'anormalmente sonolento', 'com Vomito').
-d(n, n, s, n, n, n, n, 'coceira', 'com Dermatite com febre').
+d(n, n, s, s, n, n, n, 'roubando coisas de casa', 'usando drogas.').
+d(n, n, s, n, n, n, d, 'caindo no chão inconsciente', 'com Hipoglecimia.').
+d(n, n, s, n, n, n, d, 'com urina verde ou azul', 'com problemas alimentares.').
+d(n, n, s, n, n, n, d, 'com fezes com sangue', 'com falha instestinal.').
+d(n, n, s, n, n, n, d, 'com dor ao urinar', 'com infecção do sistema urinário.').
+d(n, n, s, n, n, n, n, 'inchaço dolorido na verília', 'com Hernia inguinal estrangulada.').
+d(n, n, s, n, n, n, n, 'com dor na língua', 'com úlceras bucais.').
+d(n, n, s, n, n, n, n, 'gengivas dolorias vermelhas', 'em período de dentição.').
+d(n, n, s, n, n, n, n, 'com tosse ou coriza', 'com febre.').
+d(n, n, s, n, n, n, n, 'com febre', 'com diarréia').
+d(n, n, s, n, n, n, n, 'anormalmente sonolento', 'com vômito.').
+d(n, n, s, n, n, n, n, 'coceira', 'com Dermatite com febre.').
 
 
 % TESTES UNITARIOS
 :- begin_tests(diag).
-
-
+test(t0) :- d_base(n, n, s, n, n, n, n).
+test(t1) :- d_arvore(0, n, n, s, n, n, n, n).
 :- end_tests(diag).
 
 
