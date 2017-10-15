@@ -6,20 +6,24 @@ d_arvore(Caso, R1, R2, R3, R4, R5, R6, R7):-
 	writeln('### Dr. Thiago Kira ###'),
 	writeln('### CRM 78750 ###'),
 	writeln('### Consultorio UEM ###'),
+	writeln('### Iniciando diagnostico ... ###'),
+	writeln('### Responda as seguintes perguntas ###'),nl,
+
 	writeln(' 1 - Apresenta algum dos seguintes sintomas? '),
 	writeln(' * Respiracao anormalmente rapida'),
 	writeln(' * Respiracao ruidosa ou dificil'),
 	writeln(' * Sonolencia ou irritabilidade'),
 	writeln(' s - sim / n - nao'),
 	read(R1),
-	questao2(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso),
-	writeln(' ### DIAGNOSTICO FINAL ### '),
-	writeln(''),
-	writeln(Diagnostico_final).
+	questao2(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso),nl,nl,nl,
+	writeln(' ############################################################# '),nl,
+	writeln(' ### DIAGNOSTICO FINAL ### '),nl,
+	writeln(' Baseado no questionario, o seguinte diagnostico foi identificado : '),nl,
+	write(' -> '), writeln(Diagnostico_final).
 
 questao2(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	R1 == 's',
-	Caso = 0,
+	Caso = 1,
 	Diagnostico_final = 'Caso serio. Chame uma ambulancia';
 
 	writeln(' 2 - Apresenta algum dos seguintes sintomas? '),
@@ -96,28 +100,30 @@ verdadeiro(1).
 % Chamada principal
 diagnostico() :-
 	d_arvore(Caso, R1, R2, R3, R4, R5, R6, R7)  , !, (
-	falso(Caso) ->( writeln(''),
-		     writeln(' ### DIAGNOSTICO ALTERNATIVO ### '),
-		     writeln(''),
-		     d_base(R1, R2, R3, R4, R5, R6, R7),
-		     nl)),
-	verdadeiro(Caso) -> writeln(' ###  ### ').
+	falso(Caso) -> ( writeln(''),nl,nl,
+		     writeln(' ### DIAGNOSTICO ALTERNATIVO ### '),nl,
+		     writeln(' Baseado no questionario anterior, foi possivel inferir os seguintes diagnosticos: '),nl,
+		     d_base(R1, R2, R3, R4, R5, R6, R7), nl),
+	verdadeiro(Caso) -> writeln(' ###  ### '),
+	nl,
+	writeln(' ### ENCERRANDO SISTEMA DE DIAGNOSTICO ###'),
+	writeln(' ### OBRIGADO ### '),nl,
+	writeln(' ############################################################# ')).
 
 
 d_base(R1, R2, R3, R4, R5, R6, R7) :-
         (var(R7), var(R4)) -> (
 	d(R1, R2, R3, _, _, _, _, Condicao1, Diagnostico1),
-	write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
+	write('	-: '), write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
 	(var(R7)) -> (
 	d(R1, R2, R3, R4, _, _, _, Condicao1, Diagnostico1),
-	write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
+	write(' -: '), write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1));
 	d(R1, R2, R3, R4, R5, R6, R7, Condicao1, Diagnostico1),
-	write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1).
+	write(' -: '), write('se tiver '), write(Condicao1), write(' pode estar '), writeln(Diagnostico1).
 
 
 % BASE DE CONHECIMENTO
-
-d(n, n, n, n, s, s, s, 'rejeitando comido', 'com garganta infeccionada').
+d(n, n, n, n, s, s, s, 'rejeitando comida', 'com garganta infeccionada').
 d(n, n, n, n, s, s, d, 'com gripe ou resfriado', 'com sarampo').
 d(n, n, n, n, s, s, d, 'com tosse ou coriza', 'com resfriado').
 d(n, n, n, n, s, s, d, 'com irratabilidade incomum', 'Meningite').
