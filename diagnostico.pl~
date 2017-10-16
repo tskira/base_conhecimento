@@ -31,7 +31,7 @@ questao2(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
 	writeln(' * Vômito persistente'),
 	writeln(' * Temperatura superior a 39 graus'),
 	writeln(' s - sim / n - não'),
-	nread(R2),
+	read(R2),
 	questao3(R1, R2, R3, R4, R5, R6, R7, Diagnostico_final, Caso).
 
 questao3(R1, R2, R3, R4, R5, R6, R7,  Diagnostico_final, Caso) :-
@@ -155,7 +155,7 @@ d(n, s, d, n, s, s, d, 'com vômito persistente', 'com uma diarréia séria, cha
 d(n, s, d, n, s, s, d, 'com tosse', 'com bronquiolite.').
 d(n, s, d, n, s, s, d, 'vômito normal', 'com apenas vômito, nada serio.').
 d(n, s, d, n, s, s, d, 'com vômito seguido por crise de tosse', 'com Coqueluche.').
-d(n, s, n, n, s, s, n, 'vômito sem diarréia', 'com Meningite.').
+d(n, s, n, n, s, s, n, 'vômito sem diarréia', 'com infecção intestinal. Procure um médico.').
 d(n, s, n, n, s, s, s, 'vômito com diarréia', 'com gastroenterite.').
 d(n, s, s, s, s, s, s, 'dor de cabeça', 'com hemorragia.').
 d(s, n, s, n, n, n, d, 'com fome', 'desnutrido.').
@@ -175,13 +175,49 @@ d(n, n, s, n, n, n, n, 'gengivas dolorias vermelhas', 'em período de dentição
 d(n, n, s, n, n, n, n, 'com tosse ou coriza', 'com febre.').
 d(n, n, s, n, n, n, n, 'com febre', 'com diarréia').
 d(n, n, s, n, n, n, n, 'anormalmente sonolento', 'com vômito.').
-d(n, n, s, n, n, n, n, 'coceira', 'com Dermatite com febre.').
+d(n, n, s, n, n, n, n, 'com coceira', 'com Dermatite com febre.').
 
 
 % TESTES UNITARIOS
 :- begin_tests(diag).
-test(t0) :- d_base(n, n, s, n, n, n, n).
-test(t1) :- d_arvore(0, n, n, s, n, n, n, n).
+%teste primeira etapa do algoritmo
+%nesta etapa testa-se a arvore de decisao:
+
+%Testes para a questao 7, com 3 opcoes:
+% retorna Caso == 1 quando a resposta é 's'
+% retorna Caso ==  0 caso contrario
+test(t0, Caso = 0) :- d_arvore(Caso, n, n, s, n, n, n, d).
+test(t1, Caso = 0) :- d_arvore(Caso, n, n, s, n, n, n, n).
+test(t2, Caso = 1) :- d_arvore(Caso, n, n, s, n, n, n, s).
+
+%Testes para a questao 1, com 2 opcoes:
+%retorna Caso == 0 quando a resposta e 's'
+%passa para a pergunta 2 quando resposta 'n'
+test(t3, Caso = 0) :- d_arvore(Caso,s, _,_,_, _, _,_).
+test(t4, Caso = 0) :- d_arvore(Caso, n, s, _, _, _, _, _).
+
+%Testes em que retorna Caso == 1:
+%Questao 5:
+test(t5, Caso = 1) :- d_arvore(Caso, n, n, s, n, s, _, _).
+%Questao 6:
+test(t6, Caso = 1) :- d_arvore(Caso, n, n, s, n, n, s, __).
+% fim dos testes da arvore
+
+% testes para segunda etapa do algoritmo
+% nesta etapa testa-se a base de conhecimento
+test(t7) :- d_base(n, n, s, n, n, n, n).
+test(t8) :- d_base(n, n, s, n, n, n, d).
+test(t9) :- d_base(s, n, n, n, s, s, s).
+test(t10) :- d_base(s, n, d, n, s, s, d).
+test(t11) :- d_base(n, s, n, n, s, s, n).
+%fim dos testes com d_base
+
+%testando diretamente a base de conhecimento
+test(t12, R = 'com Dermatite com febre.' ) :- d(n, n, s, n, n, n, n,
+ 'com coceira', R).
+test(t13, R = 'com garganta infeccionada.') :- d(n, n, n, n, s, s, s, 'rejeitando comida.', R).
+test(t14, R = 'diarréia séria, chame uma ambulância.') :- d(n, n, d, n, s, s, d, 'com vômito persistente', R).
+
 :- end_tests(diag).
 
 
